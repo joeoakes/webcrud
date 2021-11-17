@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><title>Angular Rest Create</title>
+<!--Using a content delivery network - watch if they go down so does your site-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="nofollow" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body data-ng-app>
+    <form data-ng-submit="submit()" data-ng-controller="Ctrl">
+	<p>Student ID: <input data-ng-model="StudentID" /></p>
+    <p>Student Name: <input data-ng-model="StudentName" /></p>
+    <p>Student SSN: <input data-ng-model="StudentSSN" /></p>
+    <p>Student Email: <input data-ng-model="StudentEmail" /></p>
+    <p>Student Phone: <input data-ng-model="StudentPhone" /></p>
+    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+	<p>Request: {{ request }}</p>
+    <p>Response: {{ response }}</p>
+</form>
+   <button type="button" class="btn btn-primary disabled" onclick="location.href='create.html'">Create Page</button>
+   <button type="button" class="btn btn-primary" onclick="location.href='read.html'">Read Page</button>
+   <button type="button" class="btn btn-primary" onclick="location.href='update.html'">Update Page</button>
+   <button type="button" class="btn btn-primary" onclick="location.href='delete.html'">Delete Page</button>
+   <button type="button" class="btn btn-primary" onclick="location.href='post.html'">Post Page</button>
+   <button type="button" class="btn btn-primary" onclick="location.href='readAll.html'">Read All Pages</button>
+
+</body>
+<script>
+    function Ctrl($scope) {
+        $scope.submit = function () {
+            //Make sure to change the host and port to match the URL 
+            var query = "http://localhost:3000/Create?";
+			query += "studentID=" + $scope.StudentID;
+            query += "&studentName=" + $scope.StudentName;
+            query += "&studentSSN=" + $scope.StudentSSN;
+            query += "&studentEmail=" + $scope.StudentEmail;
+            query += "&studentPhone=" + $scope.StudentPhone;
+			$scope.request = query;
+			$scope.$apply();
+            $.ajax({ url: query, crossDomain: true, dataType: 'json', type: 'GET' })
+            .done(function (json) {
+                $scope.response = json.result;
+                $scope.$apply();
+            })
+            .fail(function () {
+                alert("Error");
+            });
+        }
+    }
+    </script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Angular Rest Delete</title>
+<!--Using a content delivery network - watch if they go down so does your site-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+</head>
+<body data-ng-app>
+     <form data-ng-submit="submit()" data-ng-controller="Ctrl">
+     <p>Student Id: <input data-ng-model="studentID" /></p>
+     <p><input type="submit" id="submit" value="Submit" /></p>
+	 <p>Request: {{ request }}</p>
+     <p>Response: {{ response }}</p>
+</form>
+     <p><a href="create.html">Create Page</a></p>
+     <p><a href="read.html">Read Page</a></p>
+     <p><a href="update.html">Update Page</a></p>
+     <p><a href="delete.html">Delete Page</a> </p>
+	 <p><a href="post.html">Post Page</a> </p>
+	<p><a href="readAll.html">Read All Page</a> </p>
+</body>
+<script>
+    function Ctrl($scope) {
+        $scope.submit = function () {
+            //Make sure to change the host and port to match the URL
+            var query = "http://localhost:3000/Delete?";
+            query += "studentID=" + $scope.studentID;
+			$scope.request = query;
+			$scope.$apply();
+            $.ajax({ url: query, crossDomain: true, dataType: 'json', type: 'GET' })
+                .done(function (json) {
+                    $scope.response = json.result;
+                    $scope.$apply();
+                })
+                .fail(function () {
+                    alert("Error");
+                });
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Angular Rest Read All</title>
+<!--Using a content delivery network - watch if they go down so does your site-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+</head>
+  <body data-ng-app>
+    <form data-ng-submit="submit()" data-ng-controller="Ctrl">
+    <p data-ng-repeat="student in students">
+        Student ID: {{ student.StudentID }}
+        Student Name: {{ student.StudentName }} 
+        Student SSN: {{ student.StudentSSN }} 
+        Student Email: {{ student.StudentEmail }} 
+        Student Phone: {{ student.StudentPhone }} </p>
+    <p><input type="submit" id="submit" value="Submit" /></p>
+	<p>Request: {{ request }}</p>
+    </form>
+	 <p><a href="create.html">Create Page</a></p>
+     <p><a href="read.html">Read Page</a></p>
+     <p><a href="update.html">Update Page</a></p>
+     <p><a href="delete.html">Delete Page</a> </p>
+	 <p><a href="post.html">Post Page</a> </p>
+	<p><a href="readAll.html">Read All Page</a> </p>
+</body>
+<script>
+//add code here for read all
+function Ctrl($scope) {
+    $scope.submit = function () {
+        var query = "http://localhost:3000/ReadAll?";
+		$scope.request = query;
+		$scope.$apply();
+        $.ajax({ url: query, crossDomain: true, dataType: 'json', type: 'GET' })
+            .done(function (json) {
+                //loop based on collection size ???
+                $scope.students = json;
+                $scope.$apply();
+                })
+            .fail(function () {
+                alert("Error");
+            });
+    }
+}
+</script>
+</html>
