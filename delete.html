@@ -23,17 +23,14 @@
   </div>
  </nav>
      <form data-ng-submit="submit()" data-ng-controller="Ctrl">
-     <p>Student Id: <input data-ng-model="studentID" /></p>
-     <p><input type="submit" id="submit" value="Submit" /></p>
+	 <div class="input-group">
+	   <span class="input-group-addon">Student ID</span>
+	   <input data-ng-model="StudentID" class="form-control" />
+	 </div>
+     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
 	 <p>Request: {{ request }}</p>
      <p>Response: {{ response }}</p>
 </form>
-     <p><a href="create.html">Create Page</a></p>
-     <p><a href="read.html">Read Page</a></p>
-     <p><a href="update.html">Update Page</a></p>
-     <p><a href="delete.html">Delete Page</a> </p>
-	 <p><a href="post.html">Post Page</a> </p>
-	<p><a href="readAll.html">Read All Page</a> </p>
 </body>
 <script>
     function Ctrl($scope) {

@@ -22,11 +22,29 @@
   </div>
 </nav>
     <form data-ng-submit="submit()" data-ng-controller="Ctrl">
-    <p>Student ID: <input data-ng-model="studentID" /></p>
-    <p>Student Name: <input data-ng-model="studentName" /></p>
-    <p>Student SSN: <input data-ng-model="studentSSN" /></p>
-    <p>Student Email: <input data-ng-model="studentEmail" /></p>
-    <p>Student Phone: <input data-ng-model="studentPhone" /></p>
+	<fieldset class="group">
+	 <legend>Student Information</legend>
+	 <div class="input-group">
+	   <span class="input-group-addon">Student ID</span>
+	   <input data-ng-model="StudentID" class="form-control" />
+	 </div>
+	  <div class="input-group">
+        <span class="input-group-addon">Student Name</span></span> 
+	    <input data-ng-model="StudentName" class="form-control" />
+	  </div>
+	  <div class="input-group">
+        <span class="input-group-addon">Student SSN</span>
+	    <input data-ng-model="StudentSSN" class="form-control" />
+	  </div>
+	  <div class="input-group">
+        <span class="input-group-addon">Student Email</span>
+	    <input data-ng-model="StudentEmail" class="form-control" />
+	  </div>
+	  <div class="input-group">
+        <span class="input-group-addon">Student Phone</span>
+	    <input data-ng-model="StudentPhone" class="form-control" />
+	  </div>
+	</fieldset>
     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
 	<p>Request: {{ request }}</p>
     </form>
